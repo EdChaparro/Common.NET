@@ -21,12 +21,7 @@ namespace intrepidproducts.common
                 return null;
             }
 
-            if (enumAttributes.Length > 0)
-            {
-                return enumAttributes[0].Description;
-            }
-
-            return e.ToString();
+            return enumAttributes.Length > 0 ? enumAttributes[0].Description : e.ToString();
         }
 
         public static TEnum? GetEnumFromString<TEnum>(string value) where TEnum : struct, IConvertible
