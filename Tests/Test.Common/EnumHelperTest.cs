@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace intrepidproducts.common.tests
 {
@@ -47,6 +49,20 @@ namespace intrepidproducts.common.tests
         {
             var testEnum = EnumHelper.GetEnumFromString<TestEnum>("Baz");
             Assert.IsNull(testEnum);
+        }
+
+        [TestMethod]
+        public void ShouldReturnAllValues()
+        {
+            var enums = TestEnum.Fee.GetAllValues();
+            Assert.AreEqual(4, enums.Count());
+
+            var expectedValues = new List<TestEnum>
+            {
+                TestEnum.Fee, TestEnum.Fi, TestEnum.Fo, TestEnum.Fum
+            };
+
+            Assert.IsTrue(!enums.Except(expectedValues).Any());
         }
     }
 }
