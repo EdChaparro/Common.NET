@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>intrepidproducts.common.tests</RootNamespace>
+    <RootNamespace>IntrepidProducts.Common.Tests</RootNamespace>
 
     <Platforms>AnyCPU;x64</Platforms>
 
