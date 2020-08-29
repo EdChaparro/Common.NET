@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace intrepidproducts.common
+namespace IntrepidProducts.Common
 {
     public static class EnumHelper
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace intrepidproducts.common.tests
+namespace IntrepidProducts.Common.Tests
 {
     [TestClass]
     public class EnumHelperTest
