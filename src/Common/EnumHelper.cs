@@ -7,7 +7,7 @@ namespace IntrepidProducts.Common
 {
     public static class EnumHelper
     {
-        public static String GetEnumDescription(Enum e)
+        public static String GetDescription(Enum e)
         {
             var enumInfo = e.GetType().GetField(e.ToString());
 
@@ -24,7 +24,7 @@ namespace IntrepidProducts.Common
             return enumAttributes.Length > 0 ? enumAttributes[0].Description : e.ToString();
         }
 
-        public static TEnum? GetEnumFromString<TEnum>(string value) where TEnum : struct, IConvertible
+        public static TEnum? GetFromString<TEnum>(string value) where TEnum : struct, IConvertible
         {
             if (!typeof(TEnum).IsEnum)
             {
@@ -42,12 +42,46 @@ namespace IntrepidProducts.Common
                 }
             }
             catch (ArgumentException)
-            { }
+            {
+                try
+                {
+                    //TODO: Consolidate parse methods?
+                    //Backup method that can handle values with underscores
+                    return GetEnumValueFromDescription<TEnum>(value);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
 
             return null;
         }
 
-        public static IEnumerable<TEnum> GetAllValues<TEnum>(this TEnum e) where TEnum : struct
+        public static T GetEnumValueFromDescription<T>(string description)
+        {
+            var type = typeof(T);
+            if (!type.IsEnum)
+            {
+                throw new ArgumentException("Type must be an Enum");
+            }
+
+            var fields = type.GetFields();
+            var field = fields
+                .SelectMany(f => f.GetCustomAttributes(
+                    typeof(DescriptionAttribute), false), (
+                    f, a) => new { Field = f, Att = a }).SingleOrDefault(a => ((DescriptionAttribute)a.Att)
+                    .Description.ToLower() == description.ToLower());
+
+            if (field == null)
+            {
+                throw new ArgumentException("Unable to parse Enum");
+            }
+
+            return (T)field.Field.GetRawConstantValue();
+        }
+
+            public static IEnumerable<TEnum> GetAllValues<TEnum>(this TEnum e) where TEnum : struct
         {
             return Enum.GetValues(e.GetType()).Cast<TEnum>();
         }
