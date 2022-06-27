@@ -19,35 +19,35 @@ namespace IntrepidProducts.Common.Tests
         [TestMethod]
         public void ShouldReturnDescriptionAttributeValueWhenAvailable()
         {
-            Assert.AreEqual("Fo", EnumHelper.GetEnumDescription(TestEnum.Fo));
-            Assert.AreEqual("FumbleLeana", EnumHelper.GetEnumDescription(TestEnum.Fum));
+            Assert.AreEqual("Fo", EnumHelper.GetDescription(TestEnum.Fo));
+            Assert.AreEqual("FumbleLeana", EnumHelper.GetDescription(TestEnum.Fum));
         }
 
         [TestMethod]
         public void ShouldReturnNullIfEnumValueIsOutOfRange()
         {
             const TestEnum outOfRangeEnum = (TestEnum)999;
-            Assert.IsNull(EnumHelper.GetEnumDescription(outOfRangeEnum));
+            Assert.IsNull(EnumHelper.GetDescription(outOfRangeEnum));
         }
 
         [TestMethod]
         public void ShouldConvertStringToEnum()
         {
-            var testEnum = EnumHelper.GetEnumFromString<TestEnum>("Fee");
+            var testEnum = EnumHelper.GetFromString<TestEnum>("Fee");
             Assert.AreEqual(TestEnum.Fee, testEnum);
         }
 
         [TestMethod]
         public void ShouldConvertStringToEnumRegardlessOfCase()
         {
-            var testEnum = EnumHelper.GetEnumFromString<TestEnum>("fEe");
+            var testEnum = EnumHelper.GetFromString<TestEnum>("fEe");
             Assert.AreEqual(TestEnum.Fee, testEnum);
         }
 
         [TestMethod]
         public void ShouldReturnNullIfStringValueDoesNotMatchEnum()
         {
-            var testEnum = EnumHelper.GetEnumFromString<TestEnum>("Baz");
+            var testEnum = EnumHelper.GetFromString<TestEnum>("Baz");
             Assert.IsNull(testEnum);
         }
 

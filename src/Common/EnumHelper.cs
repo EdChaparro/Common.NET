@@ -7,7 +7,7 @@ namespace IntrepidProducts.Common
 {
     public static class EnumHelper
     {
-        public static String GetEnumDescription(Enum e)
+        public static String GetDescription(Enum e)
         {
             var enumInfo = e.GetType().GetField(e.ToString());
 
@@ -24,7 +24,7 @@ namespace IntrepidProducts.Common
             return enumAttributes.Length > 0 ? enumAttributes[0].Description : e.ToString();
         }
 
-        public static TEnum? GetEnumFromString<TEnum>(string value) where TEnum : struct, IConvertible
+        public static TEnum? GetFromString<TEnum>(string value) where TEnum : struct, IConvertible
         {
             if (!typeof(TEnum).IsEnum)
             {
