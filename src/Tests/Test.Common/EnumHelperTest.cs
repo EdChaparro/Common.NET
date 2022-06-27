@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,12 +8,25 @@ namespace IntrepidProducts.Common.Tests
     [TestClass]
     public class EnumHelperTest
     {
+        public enum TestEnumWithSpacesUnderscoresAndDashes
+        {
+
+            [Description("Number One")]
+            NumberOne = 1,
+
+            [Description("Number_Two")]
+            NumberTwo = 2,
+
+            [Description("Number-Three")]
+            NumberThree = 3,
+        }
+
         public enum TestEnum
         {
             Fee = 1,
             Fi = 2,
             Fo = 3,
-            [System.ComponentModel.Description("FumbleLeana")]
+            [Description("FumbleLeana")]
             Fum = 4
         }
 
@@ -21,6 +35,19 @@ namespace IntrepidProducts.Common.Tests
         {
             Assert.AreEqual("Fo", EnumHelper.GetDescription(TestEnum.Fo));
             Assert.AreEqual("FumbleLeana", EnumHelper.GetDescription(TestEnum.Fum));
+        }
+
+        [TestMethod]
+        public void ShouldReturnDescriptionAttributeValuesWithSpacesUnderscoresAndDashes()
+        {
+            Assert.AreEqual("Number One", EnumHelper.GetDescription
+                (TestEnumWithSpacesUnderscoresAndDashes.NumberOne));
+
+            Assert.AreEqual("Number_Two", EnumHelper.GetDescription
+                (TestEnumWithSpacesUnderscoresAndDashes.NumberTwo));
+
+            Assert.AreEqual("Number-Three", EnumHelper.GetDescription
+                (TestEnumWithSpacesUnderscoresAndDashes.NumberThree));
         }
 
         [TestMethod]
@@ -35,6 +62,21 @@ namespace IntrepidProducts.Common.Tests
         {
             var testEnum = EnumHelper.GetFromString<TestEnum>("Fee");
             Assert.AreEqual(TestEnum.Fee, testEnum);
+
+            var testEnum2 = EnumHelper
+                .GetFromString<TestEnumWithSpacesUnderscoresAndDashes>("Number One");
+            Assert.AreEqual(TestEnumWithSpacesUnderscoresAndDashes.NumberOne,
+                testEnum2);
+
+            testEnum2 = EnumHelper
+                .GetFromString<TestEnumWithSpacesUnderscoresAndDashes>("Number_Two");
+            Assert.AreEqual(TestEnumWithSpacesUnderscoresAndDashes.NumberTwo,
+                testEnum2);
+
+            testEnum2 = EnumHelper
+                .GetFromString<TestEnumWithSpacesUnderscoresAndDashes>("Number-Three");
+            Assert.AreEqual(TestEnumWithSpacesUnderscoresAndDashes.NumberThree,
+                testEnum2);
         }
 
         [TestMethod]
@@ -42,6 +84,11 @@ namespace IntrepidProducts.Common.Tests
         {
             var testEnum = EnumHelper.GetFromString<TestEnum>("fEe");
             Assert.AreEqual(TestEnum.Fee, testEnum);
+
+            var testEnum2 = EnumHelper
+                .GetFromString<TestEnumWithSpacesUnderscoresAndDashes>("numBer oNe");
+            Assert.AreEqual(TestEnumWithSpacesUnderscoresAndDashes.NumberOne,
+                testEnum2);
         }
 
         [TestMethod]
