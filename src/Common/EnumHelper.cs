@@ -81,7 +81,7 @@ namespace IntrepidProducts.Common
             return (T)field.Field.GetRawConstantValue();
         }
 
-            public static IEnumerable<TEnum> GetAllValues<TEnum>(this TEnum e) where TEnum : struct
+        public static IEnumerable<TEnum> GetAllValues<TEnum>(this TEnum e) where TEnum : struct
         {
             return Enum.GetValues(e.GetType()).Cast<TEnum>();
         }

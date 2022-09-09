@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
 namespace IntrepidProducts.Common.Tests
 {
