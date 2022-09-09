@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>IntrepidProducts.Common</RootNamespace>
     <AssemblyName>IntrepidProducts.Common</AssemblyName>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
 
 </Project>
