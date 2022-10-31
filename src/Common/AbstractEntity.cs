@@ -19,6 +19,11 @@ namespace IntrepidProducts.Common
 
         public Guid Id { get; private set; } //private setter used by EF (via Reflection).
 
+        public virtual bool IsValid()
+        {
+            return true;
+        }
+
         #region Equality
         public override bool Equals(object? obj)
         {
