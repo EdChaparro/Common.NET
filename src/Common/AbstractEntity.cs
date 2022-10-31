@@ -4,7 +4,7 @@ namespace IntrepidProducts.Common
 {
     public interface IHasId
     {
-        public Guid Id { get; }
+        Guid Id { get; set; }
     }
 
     public interface IEntity : IHasId
@@ -22,7 +22,7 @@ namespace IntrepidProducts.Common
             Id = id;
         }
 
-        public Guid Id { get; private set; } //private setter used by EF (via Reflection).
+        public Guid Id { get; set; }
 
         public virtual bool IsValid()
         {
