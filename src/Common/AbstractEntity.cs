@@ -12,6 +12,11 @@ namespace IntrepidProducts.Common
 
     public abstract class AbstractEntity : IHasId, IEntity
     {
+        protected AbstractEntity()
+        {
+            Id = Guid.NewGuid();
+        }
+
         protected AbstractEntity(Guid id)
         {
             Id = id;
