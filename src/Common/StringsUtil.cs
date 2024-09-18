@@ -74,7 +74,7 @@ namespace IntrepidProducts.Common
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static string Maskify(string text)
+        public static string ToMask(string text)
         {
             if (String.IsNullOrWhiteSpace(text))
             {
@@ -93,10 +93,20 @@ namespace IntrepidProducts.Common
 
             for (int i = 0; i < lastFourCharsIndex; i++)
             {
-                maskedText = maskedText + "*";
+                maskedText += "*";
             }
 
             return maskedText + lastFourChars;
+        }
+
+        public static bool IsAllLetters(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return false;
+            }
+
+            return text.ToCharArray().All(char.IsLetter);
         }
     }
 }

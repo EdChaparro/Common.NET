@@ -46,10 +46,10 @@ namespace IntrepidProducts.Common.Tests
             const string EXPECTED_OUTPUT3 = "1";
             const string EXPECTED_OUTPUT4 = "";
 
-            Assert.AreEqual(EXPECTED_OUTPUT1, StringsUtil.Maskify(INPUT1));
-            Assert.AreEqual(EXPECTED_OUTPUT2, StringsUtil.Maskify(INPUT2));
-            Assert.AreEqual(EXPECTED_OUTPUT3, StringsUtil.Maskify(INPUT3));
-            Assert.AreEqual(EXPECTED_OUTPUT4, StringsUtil.Maskify(INPUT4));
+            Assert.AreEqual(EXPECTED_OUTPUT1, StringsUtil.ToMask(INPUT1));
+            Assert.AreEqual(EXPECTED_OUTPUT2, StringsUtil.ToMask(INPUT2));
+            Assert.AreEqual(EXPECTED_OUTPUT3, StringsUtil.ToMask(INPUT3));
+            Assert.AreEqual(EXPECTED_OUTPUT4, StringsUtil.ToMask(INPUT4));
         }
 
         [TestMethod]
@@ -66,6 +66,16 @@ namespace IntrepidProducts.Common.Tests
             Assert.AreEqual(EXPECTED_OUTPUT1, StringsUtil.ReverseAndNot(INPUT1));
             Assert.AreEqual(EXPECTED_OUTPUT2, StringsUtil.ReverseAndNot(INPUT2));
             Assert.AreEqual(EXPECTED_OUTPUT3, StringsUtil.ReverseAndNot(INPUT3));
+        }
+
+        [TestMethod]
+        public void ShouldValidateTextIsAllLetters()
+        {
+            const string IS_NOT_ALL_LETTERS = "abc123def";
+            const string IS_ALL_LETTERS = "abcdef";
+
+            Assert.IsFalse(StringsUtil.IsAllLetters(IS_NOT_ALL_LETTERS));
+            Assert.IsTrue(StringsUtil.IsAllLetters(IS_ALL_LETTERS));
         }
     }
 }
